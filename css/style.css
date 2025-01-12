@@ -283,17 +283,212 @@ button:hover {
     font-size: 0.9rem;
 }
 
-@media (max-width: 600px) {
+/* Large screens (desktop) */
+@media screen and (min-width: 1200px) {
+    .theme-switch-wrapper {
+        position: fixed;
+        top: 20px;
+        right: 40px;
+    }
+
     .container {
-        margin: 1rem auto;
+        max-width: 800px;
+        margin: 2rem auto;
+    }
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+    .theme-switch-wrapper {
+        position: fixed;
+        top: 15px;
+        right: 30px;
+    }
+
+    .container {
+        max-width: 90%;
+        margin: 1.5rem auto;
     }
     
+    .generator-form {
+        padding: 1.5rem;
+    }
+}
+
+/* Small screens (large phones) */
+@media screen and (max-width: 767px) and (min-width: 481px) {
+    .theme-switch-wrapper {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+    }
+
+    .theme-switch {
+        height: 30px;
+        width: 54px;
+    }
+
+    .slider:before {
+        height: 22px;
+        width: 22px;
+    }
+
+    .slider .fa-sun,
+    .slider .fa-moon {
+        font-size: 12px;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+
+    .container {
+        max-width: 95%;
+        margin: 1rem auto;
+    }
+
     .generator-form {
         padding: 1rem;
     }
 
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Extra small screens (small phones) */
+@media screen and (max-width: 480px) {
     .theme-switch-wrapper {
+        position: fixed;
         top: 10px;
-        right: 10px;
+        right: 15px;
+    }
+
+    .theme-switch {
+        height: 28px;
+        width: 50px;
+    }
+
+    .slider:before {
+        height: 20px;
+        width: 20px;
+        bottom: 4px;
+        left: 4px;
+    }
+
+    .slider .fa-sun,
+    .slider .fa-moon {
+        font-size: 11px;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 1rem 0.5rem;
+    }
+
+    .generator-form {
+        padding: 0.8rem;
+    }
+
+    header {
+        margin-bottom: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+        margin-top: 1rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    .input-group label {
+        font-size: 0.9rem;
+    }
+
+    .input-group input {
+        padding: 0.4rem;
+    }
+
+    .checkbox-item label {
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        padding: 0.8rem;
+    }
+
+    .social-links a {
+        font-size: 1.2rem;
+    }
+
+    .footer p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Handle landscape orientation on mobile devices */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    .theme-switch-wrapper {
+        position: absolute;  /* Changed from fixed to prevent overlap issues */
+        top: 10px;
+        right: 15px;
+    }
+
+    .container {
+        margin: 2.5rem auto 1rem auto;  /* Increased top margin to accommodate theme switch */
+    }
+
+    header {
+        margin-bottom: 1rem;
+    }
+
+    .generator-form {
+        padding: 0.8rem;
+    }
+
+    /* Adjust spacing for better fit in landscape */
+    .input-group {
+        margin-bottom: 0.8rem;
+    }
+
+    .checkbox-group {
+        margin-bottom: 0.8rem;
+    }
+}
+
+/* Dark mode adjustments for all screen sizes */
+[data-theme="dark"] .theme-switch-wrapper {
+    opacity: 0.9;
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    .slider {
+        border: 2px solid var(--text-color);
+    }
+
+    .footer a {
+        text-decoration: underline;
+    }
+}
+
+/* Reduce motion for users who prefer less animation */
+@media (prefers-reduced-motion: reduce) {
+    .slider:before {
+        transition: none;
+    }
+    
+    .slider {
+        transition: none;
+    }
+    
+    button {
+        transition: none;
     }
 }
