@@ -75,3 +75,66 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggle.checked = savedTheme === 'dark';
     
     // Theme toggle event listener
+    themeToggle.addEventListener('change', toggleTheme);
+
+    // Password generator initialization
+    const generateBtn = document.getElementById('generateBtn');
+    const specialCharsCheckbox = document.getElementById('specialChars');
+    const specialCharsInput = document.getElementById('specialCharsInput');
+    
+    // Toggle special characters input visibility
+    specialCharsCheckbox.addEventListener('change', () => {
+        specialCharsInput.style.display = specialCharsCheckbox.checked ? 'block' : 'none';
+    });
+    
+    generateBtn.addEventListener('click', () => {
+        const minLength = parseInt(document.getElementById('minLength').value);
+        const maxLength = parseInt(document.getElementById('maxLength').value);
+        const useSpecialChars = document.getElementById('specialChars').checked;
+        const specialCharsList = document.getElementById('specialCharsList').value;
+        const useNumbers = document.getElementById('numbers').checked;
+        const allowCapitalLetters = document.getElementById('capital').checked;
+        const noConsecutiveRepeats = document.getElementById('noRepeats').checked;
+        const ensureOneOfEach = document.getElementById('ensureOne').checked;
+        const numPasswords = parseInt(document.getElementById('numPasswords').value);
+        
+        // Validate inputs
+        if (minLength > maxLength) {
+            alert('Minimum length cannot be greater than maximum length');
+            return;
+        }
+        
+        const passwordsList = document.getElementById('passwordsList');
+        passwordsList.innerHTML = '';
+        
+        // Generate passwords
+        for (let i = 0; i < numPasswords; i++) {
+            const password = generatePassword(
+                minLength, maxLength, useSpecialChars, specialCharsList,
+                useNumbers, allowCapitalLetters, noConsecutiveRepeats,
+                ensureOneOfEach
+            );
+            
+            // Create password item with copy button
+            const passwordItem = document.createElement('div');
+            passwordItem.className = 'password-item';
+            passwordItem.innerHTML = `
+                <span>${i + 1}. ${password}</span>
+                <button onclick="copyToClipboard('${password}')">Copy</button>
+            `;
+            passwordsList.appendChild(passwordItem);
+        }
+        
+        // Show results
+        document.getElementById('results').classList.add('show');
+    });
+});
+
+// Utility function to copy password to clipboard
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Password copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy password:', err);
+    });
+}
