@@ -118,10 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create password item with copy button
             const passwordItem = document.createElement('div');
             passwordItem.className = 'password-item';
-            passwordItem.innerHTML = `
-                <span>${i + 1}. ${password}</span>
-                <button onclick="copyToClipboard('${password}')">Copy</button>
-            `;
+            
+            // Use textContent to safely display the password
+            const passwordText = document.createElement('span');
+            passwordText.textContent = `${i + 1}. ${password}`;
+            passwordItem.appendChild(passwordText);
+            
+            // Create the copy button and append it
+            const copyButton = document.createElement('button');
+            copyButton.textContent = 'Copy';
+            copyButton.onclick = () => copyToClipboard(password);
+            passwordItem.appendChild(copyButton);
+            
+            // Append the password item to the list
             passwordsList.appendChild(passwordItem);
         }
         
