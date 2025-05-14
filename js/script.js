@@ -12,6 +12,37 @@ function toggleTheme() {
     }
 }
 
+// Language handling
+function setLanguage(language) {
+    document.documentElement.setAttribute('data-language', language);
+    localStorage.setItem('language', language);
+    
+    // Update all text content based on language
+    const elements = document.querySelectorAll('[data-en][data-jp]');
+    elements.forEach(element => {
+        if (language === 'jp') {
+            element.textContent = element.getAttribute('data-jp');
+        } else {
+            element.textContent = element.getAttribute('data-en');
+        }
+    });
+    
+    // Update copy button text
+    const copyButtons = document.querySelectorAll('.password-item button');
+    const copyText = language === 'jp' ? 'コピー' : 'Copy';
+    copyButtons.forEach(button => {
+        button.textContent = copyText;
+    });
+}
+
+function toggleLanguage() {
+    if (document.documentElement.getAttribute('data-language') === 'en') {
+        setLanguage('jp');
+    } else {
+        setLanguage('en');
+    }
+}
+
 // Character sets
 const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -74,8 +105,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('checkbox');
     themeToggle.checked = savedTheme === 'dark';
     
+    // Language initialization
+    const savedLanguage = localStorage.getItem('language') || 'en';
+    setLanguage(savedLanguage);
+    const languageToggle = document.getElementById('language-checkbox');
+    languageToggle.checked = savedLanguage === 'jp';
+    
     // Theme toggle event listener
     themeToggle.addEventListener('change', toggleTheme);
+    
+    // Language toggle event listener
+    languageToggle.addEventListener('change', toggleLanguage);
 
     // Password generator initialization
     const generateBtn = document.getElementById('generateBtn');
@@ -97,10 +137,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const noConsecutiveRepeats = document.getElementById('noRepeats').checked;
         const ensureOneOfEach = document.getElementById('ensureOne').checked;
         const numPasswords = parseInt(document.getElementById('numPasswords').value);
+        const currentLanguage = document.documentElement.getAttribute('data-language');
+        
+        // Validation messages based on language
+        const validationMsg = currentLanguage === 'jp' 
+            ? '最小長は最大長より大きくなることはできません'
+            : 'Minimum length cannot be greater than maximum length';
         
         // Validate inputs
         if (minLength > maxLength) {
-            alert('Minimum length cannot be greater than maximum length');
+            alert(validationMsg);
             return;
         }
         
@@ -108,6 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordsList.innerHTML = '';
         
         // Generate passwords
+        const copyText = currentLanguage === 'jp' ? 'コピー' : 'Copy';
+        
         for (let i = 0; i < numPasswords; i++) {
             const password = generatePassword(
                 minLength, maxLength, useSpecialChars, specialCharsList,
@@ -126,8 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Create the copy button and append it
             const copyButton = document.createElement('button');
-            copyButton.textContent = 'Copy';
-            copyButton.onclick = () => copyToClipboard(password);
+            copyButton.textContent = copyText;
+            copyButton.onclick = () => copyToClipboard(password, currentLanguage);
             passwordItem.appendChild(copyButton);
             
             // Append the password item to the list
@@ -140,10 +188,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Utility function to copy password to clipboard
-function copyToClipboard(text) {
+function copyToClipboard(text, language) {
+    const successMsg = language === 'jp' 
+        ? 'パスワードがクリップボードにコピーされました！' 
+        : 'Password copied to clipboard!';
+    
+    const errorMsg = language === 'jp'
+        ? 'パスワードのコピーに失敗しました:'
+        : 'Failed to copy password:';
+    
     navigator.clipboard.writeText(text).then(() => {
-        alert('Password copied to clipboard!');
+        alert(successMsg);
     }).catch(err => {
-        console.error('Failed to copy password:', err);
+        console.error(errorMsg, err);
     });
 }
