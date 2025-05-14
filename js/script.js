@@ -198,7 +198,7 @@ function generatePassword(minLength, maxLength, useSpecialChars, specialCharsLis
 
 // UI Event Handlers
 document.addEventListener('DOMContentLoaded', () => {
-        // Initialize language
+    // Initialize language
     const savedLanguage = localStorage.getItem('language') || 'en';
     document.documentElement.setAttribute('data-language', savedLanguage);
     
