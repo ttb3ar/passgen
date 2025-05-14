@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-language="en">
 <head>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
     <meta charset="UTF-8">
@@ -9,41 +9,55 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round">
-                <i class="fas fa-sun"></i>
-                <i class="fas fa-moon"></i>
-            </div>
-        </label>
+    <div class="toggles-wrapper">
+        <!-- Theme toggle switch -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </div>
+            </label>
+        </div>
+        
+        <!-- Language toggle switch -->
+        <div class="language-switch-wrapper">
+            <label class="language-switch" for="language-checkbox">
+                <input type="checkbox" id="language-checkbox" />
+                <div class="slider round">
+                    <span class="lang-icon">EN</span>
+                    <span class="lang-icon">JP</span>
+                </div>
+            </label>
+        </div>
     </div>
 
     <div class="container">
         <header>
-            <h1>Secure Password Generator</h1>
-            <p>Generate strong, customizable passwords for your security needs</p>
+            <h1 data-en="Secure Password Generator" data-jp="安全なパスワード生成ツール">Secure Password Generator</h1>
+            <p data-en="Generate strong, customizable passwords for your security needs" data-jp="セキュリティニーズに合わせた強力でカスタマイズ可能なパスワードを生成">Generate strong, customizable passwords for your security needs</p>
         </header>
 
         <main class="generator-form">
             <div class="input-group">
-                <label for="minLength">Minimum Length:</label>
+                <label for="minLength" data-en="Minimum Length:" data-jp="最小長:">Minimum Length:</label>
                 <input type="number" id="minLength" min="4" value="8">
             </div>
 
             <div class="input-group">
-                <label for="maxLength">Maximum Length:</label>
+                <label for="maxLength" data-en="Maximum Length:" data-jp="最大長:">Maximum Length:</label>
                 <input type="number" id="maxLength" min="4" value="16">
             </div>
 
             <div class="checkbox-group">
                 <div class="checkbox-item">
                     <input type="checkbox" id="specialChars" checked>
-                    <label for="specialChars">Special Characters</label>
+                    <label for="specialChars" data-en="Special Characters" data-jp="特殊文字">Special Characters</label>
                 </div>
                 
                 <div class="special-chars-input" id="specialCharsInput">
-                    <label for="specialCharsList">Allowed Special Characters:</label>
+                    <label for="specialCharsList" data-en="Allowed Special Characters:" data-jp="許可する特殊文字:">Allowed Special Characters:</label>
                     <input type="text" id="specialCharsList" value="!@#$%^&*()_+-=[]{}|;:,.<>?">
                 </div>
             </div>
@@ -51,34 +65,34 @@
             <div class="checkbox-group">
                 <div class="checkbox-item">
                     <input type="checkbox" id="numbers" checked>
-                    <label for="numbers">Include Numbers</label>
+                    <label for="numbers" data-en="Include Numbers" data-jp="数字を含める">Include Numbers</label>
                 </div>
 
                 <div class="checkbox-item">
                     <input type="checkbox" id="capital" checked>
-                    <label for="capital">Include Capital Letters</label>
+                    <label for="capital" data-en="Include Capital Letters" data-jp="大文字を含める">Include Capital Letters</label>
                 </div>
 
                 <div class="checkbox-item">
                     <input type="checkbox" id="ensureOne" checked>
-                    <label for="ensureOne">One of Each Type</label>
+                    <label for="ensureOne" data-en="One of Each Type" data-jp="各タイプを1つずつ">One of Each Type</label>
                 </div>
 
                 <div class="checkbox-item">
                     <input type="checkbox" id="noRepeats">
-                    <label for="noRepeats">No Consecutive Repeats</label>
+                    <label for="noRepeats" data-en="No Consecutive Repeats" data-jp="連続する繰り返しなし">No Consecutive Repeats</label>
                 </div>
             </div>
 
             <div class="input-group">
-                <label for="numPasswords">Number of Passwords:</label>
+                <label for="numPasswords" data-en="Number of Passwords:" data-jp="パスワードの数:">Number of Passwords:</label>
                 <input type="number" id="numPasswords" min="1" max="100" value="5">
             </div>
 
-            <button id="generateBtn">Generate Passwords</button>
+            <button id="generateBtn" data-en="Generate Passwords" data-jp="パスワードを生成">Generate Passwords</button>
 
             <div class="results" id="results">
-                <h2>Generated Passwords</h2>
+                <h2 data-en="Generated Passwords" data-jp="生成されたパスワード">Generated Passwords</h2>
                 <div class="passwords-list" id="passwordsList"></div>
             </div>
         </main>
@@ -93,7 +107,7 @@
                 <i class="fab fa-linkedin"></i>
             </a>
         </div>
-        <p>Created by TTB3AR</p>
+        <p data-en="Created by TTB3AR" data-jp="TTB3ARによって作成">Created by TTB3AR</p>
     </footer>
 
     <script src="js/script.js"></script>
