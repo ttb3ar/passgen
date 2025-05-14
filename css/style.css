@@ -68,11 +68,10 @@ body {
     z-index: 100;
 }
 
-.theme-switch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    width: 60px;
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    height: 34px; /* Fixed height */
 }
 
 .theme-switch input {
@@ -501,18 +500,22 @@ button:hover {
     }
 }
 
-.language-switch-wrapper {
-    position: fixed;
-    top: 20px;
-    right: 100px; /* Position it to the left of the theme switch */
-    z-index: 100;
-}
-
 .language-switch {
     display: inline-block;
     height: 34px;
     position: relative;
     width: 60px;
+}
+
+
+.language-switch-wrapper {
+    position: fixed;
+    top: 20px; /* Same top position as theme switch */
+    right: 100px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    height: 34px; /* Fixed height */
 }
 
 .language-switch .slider {
@@ -531,31 +534,61 @@ button:hover {
     padding: 0 5px;
 }
 
-/* Ensure vertical alignment matches theme switch */
-.language-switch-wrapper,
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
+.language-switch .slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px; /* Ensure consistent with theme switch */
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px; /* Ensure consistent with theme switch */
+    border-radius: 50%;
+    z-index: 2;
 }
 
-/* Responsive adjustments for spacing */
+.language-switch .lang-label {
+    color: #2c3e50;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 1;
+}
+
+
 @media screen and (max-width: 767px) {
-    .language-switch-wrapper {
-        right: 90px;
+    .language-switch-wrapper,
+    .theme-switch-wrapper {
+        height: 30px;
+    }
+    
+    .language-switch,
+    .theme-switch {
+        height: 30px;
+        width: 54px;
+    }
+    
+    .language-switch .slider:before,
+    .theme-switch .slider:before {
+        height: 22px;
+        width: 22px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .language-switch-wrapper {
-        right: 80px;
+    .language-switch-wrapper,
+    .theme-switch-wrapper {
+        height: 28px;
     }
-}
-
-/* Handle landscape orientation */
-@media screen and (max-height: 480px) and (orientation: landscape) {
-    .language-switch-wrapper {
-        position: absolute;
-        top: 10px;
-        right: 90px;
+    
+    .language-switch,
+    .theme-switch {
+        height: 28px;
+        width: 50px;
+    }
+    
+    .language-switch .slider:before,
+    .theme-switch .slider:before {
+        height: 20px;
+        width: 20px;
     }
 }
