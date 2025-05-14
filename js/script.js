@@ -111,7 +111,7 @@ function updateUILanguage(language) {
     // Update copy buttons
     const copyButtons = document.querySelectorAll('.password-item button');
     copyButtons.forEach(button => {
-        if (button.textContent === 'Copy' || button.textContent === 'コピー') {
+        if (!button.disabled) {
             button.textContent = texts.copy;
         }
     });
@@ -253,6 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordsList.innerHTML = '';
         
         try {
+
+            const language = document.documentElement.getAttribute('data-language') || 'en';
+            const texts = translations[language];
+            
             // Generate passwords
             for (let i = 0; i < numPasswords; i++) {
                 const password = generatePassword(
@@ -272,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Create the copy button and append it
                 const copyButton = document.createElement('button');
-                copyButton.textContent = 'Copy';
+                copyButton.textContent = texts.copy;
                 copyButton.onclick = () => copyToClipboard(password, copyButton);
                 passwordItem.appendChild(copyButton);
                 
