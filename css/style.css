@@ -333,13 +333,22 @@ input:checked + .theme-slider {
     z-index: 1;
 }
 
+/* Match theme switch styles for consistency */
 input:checked + .lang-slider {
     background-color: #2c3e50;
 }
 
 /* Dark mode adjustments */
+[data-theme="dark"] .lang-slider {
+    background-color: #404040;
+}
+
 [data-theme="dark"] .lang-slider .lang-label {
     color: #ecf0f1;
+}
+
+[data-theme="dark"] input:checked + .lang-slider {
+    background-color: #2c3e50;
 }
 
 /* Media queries for responsive design */
