@@ -257,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const language = document.documentElement.getAttribute('data-language') || 'en';
             const texts = translations[language];
             
+
             // Generate passwords
             for (let i = 0; i < numPasswords; i++) {
                 const password = generatePassword(
@@ -276,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Create the copy button and append it
                 const copyButton = document.createElement('button');
+
                 copyButton.textContent = texts.copy;
                 copyButton.onclick = () => copyToClipboard(password, copyButton);
                 passwordItem.appendChild(copyButton);
@@ -300,11 +302,13 @@ function copyToClipboard(text, button) {
     navigator.clipboard.writeText(text).then(() => {
         const originalText = button.textContent;
         button.textContent = texts.copied;
+
         button.disabled = true;
         
         // Reset button after 1.5 seconds
         setTimeout(() => {
             button.textContent = texts.copy;
+
             button.disabled = false;
         }, 1500);
     }).catch(err => {
