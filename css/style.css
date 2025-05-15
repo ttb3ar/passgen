@@ -553,3 +553,98 @@ button:hover {
     font-weight: bold;
     z-index: 1;
 }
+
+/* Add these styles to match theme switch behavior */
+.language-switch input:checked + .slider {
+    background-color: #2c3e50;
+}
+
+.language-switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Adjust dark mode styling for language switch */
+[data-theme="dark"] .language-switch .slider {
+    background-color: #2c3e50;
+}
+
+[data-theme="dark"] .language-switch .lang-label {
+    color: #ecf0f1;
+}
+
+/* Media queries for language switch responsiveness - matching theme switch */
+@media screen and (max-width: 767px) and (min-width: 481px) {
+    .language-switch-wrapper {
+        top: 10px;
+        right: 90px;
+    }
+    
+    .language-switch {
+        height: 30px;
+        width: 54px;
+    }
+    
+    .language-switch .slider:before {
+        height: 22px;
+        width: 22px;
+    }
+    
+    .language-switch .lang-label {
+        font-size: 11px;
+    }
+    
+    .language-switch input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .language-switch-wrapper {
+        top: 10px;
+        right: 75px;
+    }
+    
+    .language-switch {
+        height: 28px;
+        width: 50px;
+    }
+    
+    .language-switch .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+    
+    .language-switch .lang-label {
+        font-size: 10px;
+    }
+    
+    .language-switch input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+}
+
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    .language-switch-wrapper {
+        position: absolute;
+        top: 10px;
+        right: 85px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .language-switch .slider:before {
+        transition: none;
+    }
+    
+    .language-switch .slider {
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .language-switch .slider {
+        border: 2px solid var(--text-color);
+    }
+}
