@@ -391,6 +391,6 @@ function copyToClipboard(text, button) {
         setTimeout(() => {
             button.textContent = texts.copy;
             button.disabled = false;
-        }, 1500);
+        }, 1000);
     });
 }
