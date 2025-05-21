@@ -74,11 +74,54 @@ function setLanguage(language) {
 
 // Function to toggle between languages
 function toggleLanguage() {
-    if (document.documentElement.getAttribute('data-language') === 'en') {
-        setLanguage('jp');
-    } else {
-        setLanguage('en');
-    }
+    // Get all content elements that need transition
+    const contentElements = document.querySelectorAll('h1, p, label, button, .input-hint, #results h2, .footer p');
+    
+    // First add the transition class to all elements
+    contentElements.forEach(element => {
+        element.classList.add('transition-content');
+    });
+    
+    // Then trigger reflow to ensure the transition class is applied
+    // before adding the fade-out class
+    document.body.offsetHeight;
+    
+    // Fade out all content elements
+    contentElements.forEach(element => {
+        element.classList.add('fade-out');
+    });
+    
+    // Short delay before changing language
+    setTimeout(() => {
+        // Change language
+        const currentLang = document.documentElement.getAttribute('data-language');
+        const newLang = currentLang === 'en' ? 'jp' : 'en';
+        
+        // Update language attribute and localStorage
+        document.documentElement.setAttribute('data-language', newLang);
+        localStorage.setItem('language', newLang);
+        
+        // Update UI text
+        updateUILanguage(newLang);
+        
+        // Show language indicator
+        showLanguageIndicator(newLang);
+        
+        // Fade in content elements
+        setTimeout(() => {
+            contentElements.forEach(element => {
+                element.classList.remove('fade-out');
+            });
+            
+            // Remove transition class after animation completes to avoid
+            // interfering with other transitions
+            setTimeout(() => {
+                contentElements.forEach(element => {
+                    element.classList.remove('transition-content');
+                });
+            }, 300);
+        }, 50); // Small delay to ensure DOM updates first
+    }, 300); // Match the CSS transition duration
 }
 
 // Function to update UI text based on language selection
@@ -196,6 +239,30 @@ function generatePassword(minLength, maxLength, useSpecialChars, specialCharsLis
     return password.join('');
 }
 
+// Function to show language indicator briefly
+function showLanguageIndicator(language) {
+    // Check if indicator already exists
+    let indicator = document.querySelector('.language-indicator');
+    
+    // If not, create it
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'language-indicator';
+        document.body.appendChild(indicator);
+    }
+    
+    // Set text based on current language
+    indicator.textContent = language === 'en' ? 'English' : '日本語';
+    
+    // Show the indicator
+    indicator.classList.add('show');
+    
+    // Hide after a delay
+    setTimeout(() => {
+        indicator.classList.remove('show');
+    }, 1500);
+}
+
 // UI Event Handlers
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize language
@@ -225,6 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
     const specialCharsCheckbox = document.getElementById('specialChars');
     const specialCharsInput = document.getElementById('specialCharsInput');
+
+    // Create language indicator element
+    const languageIndicator = document.createElement('div');
+    languageIndicator.className = 'language-indicator';
+    document.body.appendChild(languageIndicator);
     
     // Toggle special characters input visibility
     specialCharsCheckbox.addEventListener('change', () => {
