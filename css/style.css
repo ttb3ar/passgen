@@ -265,7 +265,7 @@ input:checked + .slider:before {
 .theme-switch-wrapper {
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: 100px;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -305,7 +305,7 @@ input:checked + .theme-slider {
 .language-switch-wrapper {
     position: fixed;
     top: 20px;
-    right: 100px;
+    right: 20px;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -394,7 +394,7 @@ input:checked + .lang-slider {
     }
     
     .language-switch-wrapper {
-        right: 90px;
+        right: 15px;
     }
     
     .theme-switch, .language-switch {
@@ -424,12 +424,12 @@ input:checked + .lang-slider {
 @media screen and (max-width: 480px) {
     .theme-switch-wrapper {
         top: 10px;
-        right: 15px;
+        right: 85px;
     }
     
     .language-switch-wrapper {
         top: 10px;
-        right: 85px;
+        right: 15px;
     }
     
     .theme-switch, .language-switch {
@@ -462,7 +462,7 @@ input:checked + .lang-slider {
     }
     
     .language-switch-wrapper {
-        right: 85px;
+        right: 15px;
     }
 }
 
