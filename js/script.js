@@ -260,7 +260,7 @@ function showLanguageIndicator(language) {
     // Hide after a delay
     setTimeout(() => {
         indicator.classList.remove('show');
-    }, 2000);
+    }, 1500);
 }
 
 // UI Event Handlers
