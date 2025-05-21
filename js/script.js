@@ -239,6 +239,30 @@ function generatePassword(minLength, maxLength, useSpecialChars, specialCharsLis
     return password.join('');
 }
 
+// Function to show language indicator briefly
+function showLanguageIndicator(language) {
+    // Check if indicator already exists
+    let indicator = document.querySelector('.language-indicator');
+    
+    // If not, create it
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'language-indicator';
+        document.body.appendChild(indicator);
+    }
+    
+    // Set text based on current language
+    indicator.textContent = language === 'en' ? 'English' : '日本語';
+    
+    // Show the indicator
+    indicator.classList.add('show');
+    
+    // Hide after a delay
+    setTimeout(() => {
+        indicator.classList.remove('show');
+    }, 2000);
+}
+
 // UI Event Handlers
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize language
@@ -268,6 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
     const specialCharsCheckbox = document.getElementById('specialChars');
     const specialCharsInput = document.getElementById('specialCharsInput');
+
+    // Create language indicator element
+    const languageIndicator = document.createElement('div');
+    languageIndicator.className = 'language-indicator';
+    document.body.appendChild(languageIndicator);
     
     // Toggle special characters input visibility
     specialCharsCheckbox.addEventListener('change', () => {
