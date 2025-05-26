@@ -2,7 +2,7 @@
 A simple website that generates passwords following best industry practices.
 https://ttb3ar.github.io/passwordSite/
 
-Features include:
+<p>Features include:
 Japanese and English languge support with transition effects and indicator
 Light/Dark theme toggling
 Customizable parameters for passwords such as:
@@ -15,4 +15,4 @@ Customizable parameters for passwords such as:
  -Whether to have one of each type
  -To have no consecutive repeats or not
  -Number of passwords to generate
- -Copy passwords to clipboard button
+ -Copy passwords to clipboard button</p>
