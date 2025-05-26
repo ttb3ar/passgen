@@ -16,3 +16,7 @@ Customizable parameters for passwords such as:
  -To have no consecutive repeats or not  
  -Number of passwords to generate  
  -Copy passwords to clipboard button  
+
+
+**Tech Stack:**
+html,css,js (and i still found a way to bloat it)
