@@ -2,7 +2,7 @@
     /* Light theme variables */
     --primary-color-light: #2c3e50;
     --secondary-color-light: #3498db;
-    --background-color-light: #f5f6fa;
+    --background-color-light: #f0f4f8;
     --text-color-light: #2c3e50;
     --form-background-light: white;
     --input-background-light: white;
@@ -11,7 +11,7 @@
     /* Dark theme variables */
     --primary-color-dark: #ecf0f1;
     --secondary-color-dark: #3498db;
-    --background-color-dark: #1a1a1a;
+    --background-color-dark: #121212;
     --text-color-dark: #ecf0f1;
     --form-background-dark: #2c2c2c;
     --input-background-dark: #363636;
