@@ -2,7 +2,7 @@
 A simple website that generates passwords following best industry practices.
 https://ttb3ar.github.io/passwordSite/  
   
-Features include:  
+<h3>Features include:</h3>  
 Japanese and English languge support with transition effects and indicator  
 Light/Dark theme toggling  
 Customizable parameters for passwords such as:  
