@@ -5,6 +5,7 @@ https://ttb3ar.github.io/passwordSite/
 **Features include:**  
 Light/Dark theme toggling  
 Japanese and English languge support with transition effects and indicator  
+Saving of last used theme/ languge  
 Customizable parameters for passwords such as:  
  -Minimum length  
  -Maximum length  
