@@ -1,5 +1,5 @@
 # passwordSite
-A simple website that generates passwords following best industry practices.
+A website that generates passwords following best industry practices.
 https://ttb3ar.github.io/passwordSite/  
   
 **Features include:**  
