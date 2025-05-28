@@ -1,6 +1,6 @@
 # passwordSite
-A website that generates passwords following best industry practices.
-https://ttb3ar.github.io/passwordSite/  
+A website that generates passwords following best industry practices.  
+https://ttb3ar.github.io/passgen/  
   
 **Features include:**  
 Light/Dark theme toggling  
