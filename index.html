@@ -93,7 +93,15 @@
             <button id="generateBtn">Generate Passwords</button>
 
             <div class="results" id="results">
-                <h2>Generated Passwords</h2>
+                <div class="results-header">
+                    <h2>Generated Passwords</h2>
+                    <div class="visibility-controls">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="showPasswords" checked>
+                            <label for="showPasswords">Show Passwords</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="passwords-list" id="passwordsList"></div>
             </div>
         </main>
