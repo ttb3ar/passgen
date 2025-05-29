@@ -7,7 +7,7 @@ Light/Dark theme toggling
 Japanese and English languge support with transition effects and indicator  
 Saving of last used theme/ languge  
 Responsive UI that reacts to mouse hovers  
-Show/hide password toggle for security against shoulder surfing  
+Show/hide password toggle for added security against shoulder surfing  
 Customizable parameters for passwords such as:  
  -Minimum length  
  -Maximum length  
