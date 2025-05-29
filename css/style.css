@@ -161,8 +161,26 @@ button:hover {
     display: block;
 }
 
-.results h2 {
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.results h2 {
+    margin: 0;
+}
+
+.visibility-controls {
+    display: flex;
+    align-items: center;
+}
+
+.visibility-controls .checkbox-item {
+    margin-bottom: 0;
 }
 
 .passwords-list {
@@ -179,6 +197,21 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.password-text {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    flex: 1;
+    margin-right: 1rem;
+    word-break: break-all;
+    transition: all 0.3s ease;
+}
+
+.password-text.hidden {
+    filter: blur(5px);
+    user-select: none;
+    cursor: default;
 }
 
 .password-item button {
@@ -418,6 +451,11 @@ input:checked + .theme-slider {
     input:checked + .slider:before {
         transform: translateX(24px);
     }
+    
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -453,6 +491,22 @@ input:checked + .theme-slider {
     input:checked + .slider:before {
         transform: translateX(22px);
     }
+    
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .password-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .password-text {
+        margin-right: 0;
+        width: 100%;
+    }
 }
 
 @media screen and (max-height: 480px) and (orientation: landscape) {
@@ -468,6 +522,10 @@ input:checked + .theme-slider {
 /* Accessibility features */
 @media (prefers-reduced-motion: reduce) {
     .slider:before, .slider {
+        transition: none;
+    }
+    
+    .password-text {
         transition: none;
     }
 }
