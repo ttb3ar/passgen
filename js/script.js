@@ -35,6 +35,7 @@ const translations = {
         numPasswords: "Number of Passwords:",
         generateBtn: "Generate Passwords",
         generatedPasswords: "Generated Passwords",
+        showPasswords: "Show Passwords",
         copy: "Copy",
         copied: "Copied!",
         error: "Error",
@@ -56,6 +57,7 @@ const translations = {
         numPasswords: "パスワードの数:",
         generateBtn: "パスワードを生成",
         generatedPasswords: "生成されたパスワード",
+        showPasswords: "パスワードを表示",
         copy: "コピー",
         copied: "コピー完了!",
         error: "エラー",
@@ -144,6 +146,7 @@ function updateUILanguage(language) {
     document.querySelector('label[for="ensureOne"]').textContent = texts.ensureOne;
     document.querySelector('label[for="noRepeats"]').textContent = texts.noRepeats;
     document.querySelector('label[for="numPasswords"]').textContent = texts.numPasswords;
+    document.querySelector('label[for="showPasswords"]').textContent = texts.showPasswords;
     
     // Update button text
     document.getElementById('generateBtn').textContent = texts.generateBtn;
@@ -263,6 +266,20 @@ function showLanguageIndicator(language) {
     }, 1500);
 }
 
+// Function to toggle password visibility
+function togglePasswordVisibility() {
+    const showPasswords = document.getElementById('showPasswords').checked;
+    const passwordTexts = document.querySelectorAll('.password-text');
+    
+    passwordTexts.forEach(passwordText => {
+        if (showPasswords) {
+            passwordText.classList.remove('hidden');
+        } else {
+            passwordText.classList.add('hidden');
+        }
+    });
+}
+
 // UI Event Handlers
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize language
@@ -292,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
     const specialCharsCheckbox = document.getElementById('specialChars');
     const specialCharsInput = document.getElementById('specialCharsInput');
+    const showPasswordsCheckbox = document.getElementById('showPasswords');
 
     // Create language indicator element
     const languageIndicator = document.createElement('div');
@@ -302,6 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
     specialCharsCheckbox.addEventListener('change', () => {
         specialCharsInput.style.display = specialCharsCheckbox.checked ? 'block' : 'none';
     });
+    
+    // Show/hide passwords event listener
+    showPasswordsCheckbox.addEventListener('change', togglePasswordVisibility);
     
     generateBtn.addEventListener('click', () => {
         const minLength = parseInt(document.getElementById('minLength').value);
@@ -314,10 +335,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const ensureOneOfEach = document.getElementById('ensureOne').checked;
         const numPasswords = parseInt(document.getElementById('numPasswords').value);
         const excludeChars = document.getElementById('excludeChars').value;
+        const showPasswords = document.getElementById('showPasswords').checked;
         
         // Validate inputs
         if (minLength > maxLength) {
-            alert('Minimum length cannot be greater than maximum length');
+            const language = document.documentElement.getAttribute('data-language') || 'en';
+            const errorMsg = language === 'en' 
+                ? 'Minimum length cannot be greater than maximum length'
+                : '最小長は最大長より大きくできません';
+            alert(errorMsg);
             return;
         }
         
@@ -325,11 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordsList.innerHTML = '';
         
         try {
-
             const language = document.documentElement.getAttribute('data-language') || 'en';
             const texts = translations[language];
             
-
             // Generate passwords
             for (let i = 0; i < numPasswords; i++) {
                 const password = generatePassword(
@@ -342,14 +366,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const passwordItem = document.createElement('div');
                 passwordItem.className = 'password-item';
                 
-                // Use textContent to safely display the password
+                // Create password text element with proper class for show/hide functionality
                 const passwordText = document.createElement('span');
+                passwordText.className = 'password-text';
                 passwordText.textContent = `${i + 1}. ${password}`;
+                
+                // Apply initial visibility state
+                if (!showPasswords) {
+                    passwordText.classList.add('hidden');
+                }
+                
                 passwordItem.appendChild(passwordText);
                 
                 // Create the copy button and append it
                 const copyButton = document.createElement('button');
-
                 copyButton.textContent = texts.copy;
                 copyButton.onclick = () => copyToClipboard(password, copyButton);
                 passwordItem.appendChild(copyButton);
@@ -361,7 +391,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Show results
             document.getElementById('results').classList.add('show');
         } catch (error) {
-            alert(error.message);
+            const language = document.documentElement.getAttribute('data-language') || 'en';
+            const errorMsg = language === 'en' ? error.message : 'エラーが発生しました: ' + error.message;
+            alert(errorMsg);
         }
     });
 });
@@ -374,13 +406,11 @@ function copyToClipboard(text, button) {
     navigator.clipboard.writeText(text).then(() => {
         const originalText = button.textContent;
         button.textContent = texts.copied;
-
         button.disabled = true;
         
         // Reset button after 1.5 seconds
         setTimeout(() => {
             button.textContent = texts.copy;
-
             button.disabled = false;
         }, 1500);
     }).catch(err => {
