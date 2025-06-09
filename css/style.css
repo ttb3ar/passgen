@@ -515,15 +515,15 @@ input:checked + .theme-slider {
     }
 
     .home-button-wrapper {
-    top: 15px;
-    left: 15px;
-  }
-  
-  .home-button {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-  }
+        top: 15px;
+        left: 15px;
+    }
+      
+    .home-button {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -577,15 +577,15 @@ input:checked + .theme-slider {
     }
 
     .home-button-wrapper {
-    top: 10px;
-    left: 10px;
-  }
-  
-  .home-button {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
+        top: 10px;
+        left: 10px;
+    }
+      
+    .home-button {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-height: 480px) and (orientation: landscape) {
@@ -598,8 +598,8 @@ input:checked + .theme-slider {
     }
 
    .home-button-wrapper {
-    position: absolute;
-  }
+        position: absolute;
+   }
 }
 
 /* Accessibility features */
